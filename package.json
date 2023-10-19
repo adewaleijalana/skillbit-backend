@@ -1,0 +1,49 @@
+{
+  "name": "skillbit-be",
+  "version": "1.1.0",
+  "description": "Database",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "go": "nodemon server.js",
+    "server": "set NODE_ENV=LOCAL&&nodemon server.js",
+    "client": "yarn start --prefix frontend",
+    "echo": "echo \"Hello World\"",
+    "prestart": "node pre-start.js",
+    "dev": "yarn prestart && yarn server"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "https-localhost": "^4.7.1",
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bitcoin-rpc": "^0.2.1",
+    "bluebird": "^3.7.2",
+    "compression": "^1.7.4",
+    "config": "^3.3.6",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-device": "^0.4.2",
+    "express-session": "^1.17.3",
+    "express-validator": "^6.12.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.4",
+    "mongoose": "^5.13.7",
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-github2": "^0.1.12",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-linkedin-oauth2": "^2.0.0",
+    "passport-microsoft": "^0.1.0",
+    "simple-git": "^3.19.1",
+    "winston": "^3.10.0"
+  }
+}
