@@ -1,7 +1,6 @@
 const axios = require("axios").default
 const { jiraPAT } = require("../../utils/setEnvs")
 const Audit = require("../../models/Audit")
-const Exception = require("../../models/ErrExceptions")
 
 const config = {
   headers: {
@@ -101,12 +100,6 @@ const transformJiraPayload = async (body, type) => {
   } catch (error) {
     console.log("errr at transforming jira payload", error)
 
-    await new Exception({
-      errObject: error?.toString(),
-      errResponse: error?.response?.toString(),
-      errData: error?.response?.data?.toString(),
-      errSource: "jira webhook transforming payload",
-    }).save()
   }
 }
 
@@ -172,12 +165,6 @@ const jiraWebhookController = async (req, res) => {
   } catch (error) {
     console.log("webhook endpoint failed", error)
 
-    await new Exception({
-      errObject: error?.toString(),
-      errResponse: error?.response?.toString(),
-      errData: error?.response?.data?.toString(),
-      errSource: "jira receiving webhook payload",
-    }).save()
     res.status(200).send("successful")
   }
 }

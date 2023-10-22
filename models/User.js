@@ -13,41 +13,6 @@ const UserSchema = new mongoose.Schema(
     title: {
       type: String,
     },
-    paymentProfileUrl: {
-      type: String,
-      lowercase: true,
-    },
-    twitterProfileUrl: {
-      type: String,
-      lowercase: true,
-    },
-    facebookProfileUrl: {
-      type: String,
-      lowercase: true,
-    },
-    githubProfileUrl: {
-      type: String,
-      lowercase: true,
-    },
-    linkedinProfileUrl: {
-      type: String,
-      lowercase: true,
-    },
-    keybase: {
-      type: String,
-    },
-    calendlyProfileUrl: {
-      type: String,
-      lowercase: true,
-    },
-    sjultraEmail:{
-      type: String,
-      lowercase: true,
-    },
-    profileSetup: {
-      type: Boolean,
-      default: false,
-    },
     isSuspended: {
       type: Boolean,
       default: false,
@@ -55,6 +20,15 @@ const UserSchema = new mongoose.Schema(
     matchingContactEmail:{
       type:String,
     },
+    withdrawalAddress:{
+      type:String
+    },
+    pkEncrypt:{
+      type:String
+    },
+    pbKey:{
+      type:String
+    }
 
   },
   { timestamps: true }

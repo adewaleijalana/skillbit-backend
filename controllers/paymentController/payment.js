@@ -39,16 +39,20 @@ async function getNewChangeAddress() {
 };
 
 async function getNewChangePublicKey() {
+
     // todo: we need to keep this as env variable
+
     const XPUB = 'tpubDDEVNmPWsSWzQJfGCdUg6uSEXeSuL14yAYs29MDYgxjDr1jz95F4K5ixvXfnXPTBLegZ5aiMx4gyfLV1VtnTr2dW2V2csZHW5F1kDfGY5ML';
+
     const node = bip32.fromBase58(XPUB, testnet);
-    return node.derive(1).derive(0).publicKey.toString('hex');;
+
+    return node.derive(1).derive(0).publicKey.toString('hex');
+
 };
 
 
 async function createMultisigAddress(buyerPubKey, sellerPubKey, escrowPubKey) {
-    const publicKeys = [buyerPubKey, sellerPubKey, escrowPubKey]
-    .map(hex => Buffer.from(hex, 'hex'));;
+    const publicKeys = [buyerPubKey, sellerPubKey, escrowPubKey].map(hex => Buffer.from(hex, 'hex'));;
 
     const {address} = bitcoin.payments.p2sh({
         redeem: bitcoin.payments.p2ms({
