@@ -1,7 +1,6 @@
 const { stringToBase64Enc } = require("../../utils/helpers")
 const Audit = require("../../models/Audit")
 const User = require("../../models/User")
-const ErrExceptions = require("../../models/ErrExceptions")
 const { RETURN_EMAIL_HIERARCHY } = require("../../utils/constants")
 
 const axios = require("axios").default
@@ -139,12 +138,6 @@ const transformADOPayload = async (body) => {
     console.log("webhook saved", saveWebhoook)
   } catch (error) {
     console.log("err at transforming data payload", error)
-    await new ErrExceptions({
-      errObject: JSON.stringify(error),
-      errResponse: JSON.stringify(error?.response),
-      errData: JSON.stringify(error?.response?.data),
-      errSource: "ado webhook transforming payload",
-    }).save()
   }
 }
 

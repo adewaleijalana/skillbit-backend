@@ -4,10 +4,6 @@ const Profile = require("../models/User")
 const Onboard = require("../models/Onboard")
 const mongoose = require("mongoose")
 const { GeneralAuditLog } = require("./auditController/auditController")
-const {
-  // uploadImgToS3,
-  // s3UploadImg,
-} = require("../utils/helpers")
 const { controllerValidatorTypes, transformErrorPayload } = require("../utils/validators")
 
 // @route    GET /profile/me
