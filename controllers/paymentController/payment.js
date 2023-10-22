@@ -10,18 +10,18 @@ const network = bitcoin.networks.testnet
 async function getNewPublicKey() {
     // todo: we need to keep this as env variable
     const XPUB = 'tpubDDEVNmPWsSWzQJfGCdUg6uSEXeSuL14yAYs29MDYgxjDr1jz95F4K5ixvXfnXPTBLegZ5aiMx4gyfLV1VtnTr2dW2V2csZHW5F1kDfGY5ML';
-    const node = bip32.fromBase58(XPUB, bitcoin.networks.testnet);
+    const node = bip32.fromBase58(XPUB, testnet);
     return node.derive(0).derive(0).publicKey.toString('hex');
 };
 
 async function getNewAddress() {
     // todo: we need to keep this as env variable
     const XPUB = 'tpubDDEVNmPWsSWzQJfGCdUg6uSEXeSuL14yAYs29MDYgxjDr1jz95F4K5ixvXfnXPTBLegZ5aiMx4gyfLV1VtnTr2dW2V2csZHW5F1kDfGY5ML';
-    const node = bip32.fromBase58(XPUB, bitcoin.networks.testnet);
+    const node = bip32.fromBase58(XPUB, testnet);
     const { address } = bitcoin.payments.p2pkh({
         //to receive payments
         pubkey: node.derive(0).derive(0).publicKey,
-        network: bitcoin.networks.testnet
+        network: network
     });
     return address;
 };
@@ -29,11 +29,11 @@ async function getNewAddress() {
 async function getNewChangeAddress() {
     // todo: we need to keep this as env variable
     const XPUB = 'tpubDDEVNmPWsSWzQJfGCdUg6uSEXeSuL14yAYs29MDYgxjDr1jz95F4K5ixvXfnXPTBLegZ5aiMx4gyfLV1VtnTr2dW2V2csZHW5F1kDfGY5ML';
-    const node = bip32.fromBase58(XPUB, bitcoin.networks.testnet);
+    const node = bip32.fromBase58(XPUB, testnet);
     const { address } = bitcoin.payments.p2pkh({
         //to receive changes
         pubkey: node.derive(1).derive(0).publicKey,
-        network: bitcoin.networks.testnet
+        network: testnet
     });
     return address;
 };
@@ -41,7 +41,7 @@ async function getNewChangeAddress() {
 async function getNewChangePublicKey() {
     // todo: we need to keep this as env variable
     const XPUB = 'tpubDDEVNmPWsSWzQJfGCdUg6uSEXeSuL14yAYs29MDYgxjDr1jz95F4K5ixvXfnXPTBLegZ5aiMx4gyfLV1VtnTr2dW2V2csZHW5F1kDfGY5ML';
-    const node = bip32.fromBase58(XPUB, bitcoin.networks.testnet);
+    const node = bip32.fromBase58(XPUB, testnet);
     return node.derive(1).derive(0).publicKey.toString('hex');;
 };
 
@@ -54,7 +54,7 @@ async function createMultisigAddress(buyerPubKey, sellerPubKey, escrowPubKey) {
         redeem: bitcoin.payments.p2ms({
             m: 2,
             pubkeys: publicKeys,
-            network: bitcoin.networks.testnet
+            network: testnet
         })
     });
 
@@ -77,7 +77,7 @@ async function getUTXOsFromPublicKey(publicKey) {
         const add = Buffer.from(publicKey, 'hex');
         const { address } = bitcoin.payments.p2pkh({
             pubkey: add,
-            network: bitcoin.networks.testnet
+            network: testnet
         });
         
         console.log(address);
