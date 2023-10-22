@@ -35,7 +35,8 @@ const createOnboardingPersona = async(req,res)=>{
 
     let {contactEmail,name} = req.body;
 
-    let uniqueValuesExist= await controllerValidatorTypes.isUnique(Onboard,['contactEmail'],req.body,`is already associated with a different user`)
+    let uniqueValuesExist= await controllerValidatorTypes
+    .isUnique(Onboard,['contactEmail'],req.body,`is already associated with a different user`)
 
     if (uniqueValuesExist){
       return res.status(400).json(uniqueValuesExist)
@@ -144,7 +145,7 @@ const updateOnboardingStatus = async (req, res) => {
 }
 
 const createCreateMultiSig = async(req,res)=>{
-    const { BitcoinRPC } = require('bitcoin-rpc');
+const { BitcoinRPC } = require('bitcoin-rpc');
 
 const rpc = new BitcoinRPC({
   host: 'localhost',

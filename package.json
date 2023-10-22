@@ -23,7 +23,11 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "bip32": "^4.0.0",
+    "bip39": "^3.1.0",
     "bitcoin-rpc": "^0.2.1",
+    "bitcoinjs-lib": "^6.1.5",
+    "bitcore-lib": "^10.0.11",
     "bluebird": "^3.7.2",
     "compression": "^1.7.4",
     "config": "^3.3.6",
@@ -44,6 +48,7 @@
     "passport-linkedin-oauth2": "^2.0.0",
     "passport-microsoft": "^0.1.0",
     "simple-git": "^3.19.1",
+    "tiny-secp256k1": "^2.2.3",
     "winston": "^3.10.0"
   }
 }
