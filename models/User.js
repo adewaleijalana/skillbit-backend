@@ -26,6 +26,9 @@ const UserSchema = new mongoose.Schema(
     pkEncrypt:{
       type:String
     },
+    location:{
+      type:String
+    },
     pbKey:{
       type:String
     }

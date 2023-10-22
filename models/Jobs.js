@@ -29,18 +29,21 @@ const JobsSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "user",
     },
+    payment:{
+        type:Number  
+    },
+    hours:{
+        type:Number
+    },
+    duration:{
+        type:Number
+    },
+    skills:[String]
+    ,
     roleRequired: {
       type: String,
       default: false,
     },
-
-    matchingContactEmail:{
-      type:String,
-    },
-
-    bitcoinAddress:{
-      type:String
-    }
   },
   { timestamps: true }
 )
