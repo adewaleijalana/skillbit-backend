@@ -125,7 +125,8 @@ async function createUserWallet() {
 module.exports = {
     getNewAddress,
     getNewChangeAddress,
-    createMultisigAddress
+    createMultisigAddress,
+    createUserWallet
 }
 
 // getNewPublicKey()
