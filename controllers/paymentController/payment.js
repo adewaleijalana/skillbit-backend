@@ -48,9 +48,9 @@ async function getNewChangePublicKey() {
 
 async function createMultisigAddress(buyerPubKey, sellerPubKey, escrowPubKey) {
     const publicKeys = [buyerPubKey, sellerPubKey, escrowPubKey]
-    .map(hex => Buffer.from(hex, 'hex'));;
+        .map(hex => Buffer.from(hex, 'hex'));;
 
-    const {address} = bitcoin.payments.p2sh({
+    const { address } = bitcoin.payments.p2sh({
         redeem: bitcoin.payments.p2ms({
             m: 2,
             pubkeys: publicKeys,
@@ -79,7 +79,7 @@ async function getUTXOsFromPublicKey(publicKey) {
             pubkey: add,
             network: testnet
         });
-        
+
         console.log(address);
         const { data: utxos } = await axios.get(`https://blockstream.info/testnet/api/address/${address}/utxo`);
         return utxos;
@@ -90,7 +90,7 @@ async function getUTXOsFromPublicKey(publicKey) {
 }
 
 
-function testAddress() {
+async function createUserWallet() {
     const path = `m/44'/0'/0'/0`
 
     let mnemonic = bip39.generateMnemonic()
@@ -100,20 +100,25 @@ function testAddress() {
     let account = root.derivePath(path)
     let node = account.derive(0).derive(0)
 
-    let btcAddress = bitcoin.payments.p2pkh({
+    let { address } = bitcoin.payments.p2pkh({
         pubkey: node.publicKey,
         network: network,
-    }).address
+    })
 
 
     console.log(`
-Wallet generated: 
-- Key : ${node.toWIF()},
-- Mnemonic : ${mnemonic}
-- Address : ${btcAddress},
-- Public Key: ${node.publicKey.toString('hex')}
+        Wallet generated: 
+        - Key : ${node.toWIF()},
+        - Mnemonic : ${mnemonic}
+        - Address : ${address},
+        - Public Key: ${node.publicKey.toString('hex')}
 `)
 
+    return {
+        privateKey: node.toWIF(),
+        publicKey: node.publicKey.toString('hex'),
+        address: address
+    }
 
 }
 
@@ -145,11 +150,11 @@ module.exports = {
 
 
 getUTXOs("2MypVWvBHzSweRF27tMr9PsCE7Gk887rzJ4")
-.then(res => console.log(res))
-.catch(err => console.log(err));
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
 
-// testAddress();
-// testAddress();
+// createUserWall();
+// createUserWall();
 
 // createMultisigAddress('029e819ba74e13cf6cf4164566c4a9e0bb955b906372c138c85c13ff0497fb1623', 
 // '02a7ee049b03b2e28731326e7c23b67753d2fe450b69cfb2457342f18607268091', '03bda28ab8cf2d6d2f934055377b89f2f418916e20aaea73a83b83405bed6f67b6')
