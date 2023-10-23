@@ -144,6 +144,24 @@ const maybePluralize = (count, noun, suffix = "s") => `${noun}${count !== 1 ? su
 
 const sortPagination = (page,limit=20)=> (page - 1) * limit;
 
+const encryptPrivateKeyWithPIN = (privateKey, pin) => {
+  const cipher = crypto.createCipher('aes-256-gcm', pin);
+  const encryptedPrivateKey = Buffer.concat([cipher.update(privateKey, 'utf8'), cipher.final()]);
+  const authTag = cipher.getAuthTag();
+
+  return {
+    encryptedPrivateKey,
+    authTag
+  };
+};
+
+const decryptPrivateKeyWithPIN = (encryptedPrivateKey, authTag, pin) => {
+  const decipher = crypto.createDecipheriv('aes-256-gcm', pin, authTag);
+  const decryptedPrivateKey = Buffer.concat([decipher.update(encryptedPrivateKey), decipher.final()]);
+
+  return decryptedPrivateKey.toString('utf8');
+}
+
 
 
 module.exports = {
@@ -158,5 +176,7 @@ module.exports = {
   hexStringToBinary,
   maybePluralize,
   replaceDashWithLowDash,
-  sortPagination
+  sortPagination,
+  encryptPrivateKeyWithPIN,
+  decryptPrivateKeyWithPIN
 }
