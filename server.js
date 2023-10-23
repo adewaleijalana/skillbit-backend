@@ -35,7 +35,6 @@ app.use(
 require("./config/index")
 
 // Initialize passport
-app.use(passport.initialize())
 
 app.use(
   session({
@@ -118,7 +117,7 @@ app.use(function (err, req, res, next) {
   })
 })
 
-const PORT = process.env.PORT 
+const PORT = 5030
 
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))

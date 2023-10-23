@@ -11,6 +11,9 @@ router.get('/',auth,admin,getOnboardingPersonas);
 
 router.post('/payment',getOnboardingPersonas);
 
+router.post('/widthdraw',getOnboardingPersonas);
+
+
 router.post("/update", auth, admin, updateOnboardStatus);
 
 router.post("/initiate", auth, admin, createOnboardingPersona);
